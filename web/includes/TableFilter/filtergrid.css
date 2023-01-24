@@ -12,7 +12,7 @@ table.TF{
 	border-bottom:1px solid #ccc; border-right:1px solid #ccc;
 }
 table.TF th{
-	background-color:#EBECEE; 
+	background-color:#0e4ac2; 
 	border-bottom:1px solid #D0D0D0; border-right:1px solid #D0D0D0;
 	border-left:1px solid #fff; border-top:1px solid #fff;
 	padding:5px 5px 5px 5px; color:#333;
@@ -23,7 +23,7 @@ table.TF td{ padding:5px 5px 5px 5px; border-bottom:1px solid #D0D0D0; border-ri
 /* FILTERS BAR
 =====================================================*/
 .fltrow{ /* filter grid row appearance */
-	height:20px;
+	height:50px;
 	background-color:#f4f4f4;
 }
 .fltrow td, .fltrow th{ padding:2px !important; } 
@@ -43,7 +43,7 @@ table.TF td{ padding:5px 5px 5px 5px; border-bottom:1px solid #D0D0D0; border-ri
 }
 select.flt{ /* select filter */
 	background-color:#fff; border:1px solid #ccc; 
-	margin:0 1px 1px 0; width:99%; font-size:9px; vertical-align:middle;
+	margin:0 1px 1px 0; width:99%; font-size:12px; vertical-align:middle;
 }
 select.flt_multi{ /* multiple select filter */
 	background-color:#fff; border:1px solid #ccc; 
@@ -93,7 +93,7 @@ select.flt_multi{ /* multiple select filter */
 =====================================================*/
 /* Reset button */
 input.reset{
-	width:19px; height:19px; cursor:pointer !important;
+	width:30px; height:30px; cursor:pointer !important;
 	border:0 !important; vertical-align:middle;
 	background:transparent url(TF_Themes/btn_clear_filters.png) center center no-repeat !important;
 }

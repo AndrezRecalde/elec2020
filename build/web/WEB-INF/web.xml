@@ -40,6 +40,10 @@
         <servlet-name>webster</servlet-name>
         <servlet-class>webster</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>websterc2</servlet-name>
+        <servlet-class>websterc2</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>webster</servlet-name>
         <url-pattern>/webster</url-pattern>
@@ -104,8 +108,7 @@
         <servlet-name>Dignidad</servlet-name>
         <url-pattern>/Dignidad</url-pattern>
     </servlet-mapping>
-    
-     <servlet>
+    <servlet>
         <servlet-name>UploadFile</servlet-name>
         <servlet-class>UploadFile</servlet-class>
     </servlet>
@@ -113,16 +116,14 @@
         <servlet-name>UploadFile</servlet-name>
         <url-pattern>/UploadFile</url-pattern>
     </servlet-mapping>
-    
     <context-param>
         <param-name>dirUploadFiles</param-name>
         <param-value>C:\Users\TIC-DQUEVEDO\Documents\NetBeansProjects\elecciones\web\images\actas</param-value>
     </context-param>
     <context-param>
         <param-name>maxFileSize</param-name>
-        <param-value>5024000</param-value>        
+        <param-value>5024000</param-value>
     </context-param>
-    
     <servlet>
         <servlet-name>admin_controlador.srvlt_accesos_listar_todos</servlet-name>
         <servlet-class>admin_controlador.srvlt_accesos_listar_todos</servlet-class>
@@ -131,7 +132,6 @@
         <servlet-name>admin_controlador.srvlt_accesos_listar_todos</servlet-name>
         <url-pattern>/admin/admin_controlador.srvlt_accesos_listar_todos</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>admin_controlador.srvlt_junta_listar_todos</servlet-name>
         <servlet-class>admin_controlador.srvlt_junta_listar_todos</servlet-class>
@@ -228,9 +228,6 @@
         <servlet-name>admin_controlador.srvlt_usuario_listar_combo</servlet-name>
         <url-pattern>/admin/admin_controlador.srvlt_usuario_listar_combo</url-pattern>
     </servlet-mapping>
-    
-    
-    
     <servlet>
         <servlet-name>admin_controlador.srvlt_acta_images_insert</servlet-name>
         <servlet-class>admin_controlador.srvlt_acta_images_insert</servlet-class>
@@ -295,7 +292,6 @@
         <servlet-name>admin_controlador.srvlt_acta_images_listar_combo</servlet-name>
         <url-pattern>/admin/admin_controlador.srvlt_acta_images_listar_combo</url-pattern>
     </servlet-mapping>
-    
     <!-- RECINTOS -->
     <servlet>
         <servlet-name>admin_controlador.srvlt_recintos_insert</servlet-name>
@@ -361,7 +357,10 @@
         <servlet-name>admin_controlador.srvlt_recintos_listar_combo</servlet-name>
         <url-pattern>/admin/admin_controlador.srvlt_recintos_listar_combo</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>websterc2</servlet-name>
+        <url-pattern>/websterc2</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             -1

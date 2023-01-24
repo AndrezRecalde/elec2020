@@ -20,11 +20,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Digitacion de Actas</title>
+        <link href="css/alertas.css" rel="stylesheet" type="text/css" media="screen" />
 
-        <link href="styles/generales.css" rel="stylesheet" type="text/css" media="screen" />
-        <link href="styles/basic.css" rel="stylesheet" type="text/css" media="screen" />
+        <!-- Iconos -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
 
-        <script type="text/javascript" src="includes/jquery.js"></script>
+        <!-- <link href="styles/generales.css" rel="stylesheet" type="text/css" media="screen" /> -->
+        <!-- <link href="styles/basic.css" rel="stylesheet" type="text/css" media="screen" /> -->
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+        <!-- <script type="text/javascript" src="includes/jquery.js"></script> -->
         <script type="text/javascript" src="includes/combinados.js"></script>
 
     </head>
@@ -49,7 +56,7 @@
                         iddignidad = Integer.parseInt(request.getParameter("iddignidad").toString());
                         if (iddignidad == -1) {
                             error = true;
-                            errorString = "Por favor seleecione una Dignidad";
+                            errorString = "Por favor seleccione una Dignidad";
                         }
                         ArrayList lista = null;
                         if (session.getAttribute("dignidades") != null) {
@@ -67,7 +74,7 @@
                         idprovincia = Integer.parseInt(request.getParameter("idprovincia").toString());
                         if (idprovincia == -1) {
                             error = true;
-                            errorString = "Por favor seleecione una Provincia";
+                            errorString = "Por favor seleccione una Provincia";
                         }
                         ArrayList lista = null;
                         if (session.getAttribute("provincias") != null) {
@@ -85,7 +92,7 @@
                         idcanton = Integer.parseInt(request.getParameter("idcanton").toString());
                         if (idcanton == -1) {
                             error = true;
-                            errorString = "Por favor seleecione un Canton";
+                            errorString = "Por favor seleccione un Canton";
                         }
                         if (usu_edi.getes_cantonal()) {
                             CcantonesDB canDB = new CcantonesDB();
@@ -93,7 +100,7 @@
                             can = canDB.Seleccionar_Id(idcanton);
                             if (usu_edi.getFr_id_canton_padre() != can.getfr_id_canton_pertenece()) {
                                 error = true;
-                                errorString = "Por favor seleeciona actas del cantón al que has sido asignado.";
+                                errorString = "Por favor selecciona actas del cantón al que has sido asignado.";
                             }
                         }
                         ArrayList lista = null;
@@ -112,7 +119,7 @@
                         idparroquia = Integer.parseInt(request.getParameter("idparroquia").toString());
                         if (idparroquia == -1) {
                             error = true;
-                            errorString = "Por favor seleecione una Parroquia";
+                            errorString = "Por favor seleccione una Parroquia";
                         } else {
                             ArrayList lista = null;
                             if (session.getAttribute("parroquias") != null) {
@@ -131,7 +138,7 @@
                         idzona = Integer.parseInt(request.getParameter("idzona").toString());
                         if (idzona == -1) {
                             error = true;
-                            errorString = "Por favor seleecione una Zona";
+                            errorString = "Por favor seleccione una Zona";
                         } else {
                             ArrayList lista = null;
                             if (session.getAttribute("zonas") != null) {
@@ -150,7 +157,7 @@
                         idjunta = Integer.parseInt(request.getParameter("idjunta").toString());
                         if (idjunta == -1) {
                             error = true;
-                            errorString = "Por favor seleecione una Junta";
+                            errorString = "Por favor seleccione una Junta";
                         } else {
                             ArrayList lista = null;
                             if (session.getAttribute("juntas") != null) {
@@ -165,9 +172,9 @@
                             }
                         }
                     }
-                    if(request.getParameter("error")!=null){
-                        error=true;
-                        errorString=request.getParameter("error");
+                    if (request.getParameter("error") != null) {
+                        error = true;
+                        errorString = request.getParameter("error");
                     }
                     if (!error) {
                         //Veo si ya se ha ingresado el acta de esa dignidad
@@ -196,81 +203,87 @@
                         }
                     } else {
             %>
-            <div class="error">Error: <%= errorString %></div>
+            <div class="row d-flex justify-content-center mt-3">
+                <div class="col-lg-5">
+                    <div class="alert alert-danger" role="alert">
+                        Error: <strong><%= errorString%></strong> 
+                    </div>
+                </div>
+            </div>  
             <%
                     }
                 }
             %>
+            <center>
+                <%
+                    if (request.getParameter("men") != null) {
+                %>
+                <div id="alerts-x" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <%= request.getParameter("men").toString()%>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
 
-            <div id="cuerpo" style="text-align: center" >
-                <center>
-                    <table>
-                        <tr>
-                            <td style="text-align: center" colspan="2"><h1><b>DIGITAR ACTAS.</b></h1></td>
-                        </tr>
-                        <tr>
-                            <td><b>DIGNIDAD:</b></td>
-                            <td>
-                                <select name="iddignidad" id="iddignidad" style="width: 150px">
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>PROVINCIA:</b></td>
-                            <td>
-                                <select name="idprovincia" id="idprovincia" style="width: 150px">
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>CANTÓN:</b></td>
-                            <td>
-                                <select name="idcanton" id="idcanton" style="width: 150px">
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>PARROQUIA:</b></td>
-                            <td>
-                                <select name="idparroquia" id="idparroquia" style="width: 150px">
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>ZONA:</b></td>
-                            <td colspan="3">
-                                <select name="idzona" id="idzona" style="width: 150px">
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>JUNTA:</b></td>
-                            <td>
-                                <select name="idjunta" id="idjunta" style="width: 150px">
-                                </select>
-                            </td>
-                        </tr>
-                        <tr class="">
-                            <td style="text-align: center">
-                                <input type="button" id="aceptar" onclick="javascript:history.back(1)" name="Atras" value="REGRESAR"/>
-                            </td>
-                            <TD style="text-align: center">
-                                <input type="submit" name="actas" value="DIGITAR" >
+                <%
+                    }
+                %>
+            </center>
 
-                            </td>
-                        </tr>
-                    </table>
-                    <center>
-                        <%
-                            if (request.getParameter("men") != null) {
-                        %>
-                        <%= request.getParameter("men").toString()%>
-                        <%
-                            }
-                        %>
-                    </center>
-                </center>
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-5 col-sm-12">
+                    <div class="card bg-light p-4 mt-2 mt-2 mb-5">
+                        <h5 class="card-header bg-light border-bottom p-3 p-sm-4">DIGITAR ACTAS</h5>
+                        <div class="card-body">
+                            <div class="form-floating">
+                                <select class="form-select" name="iddignidad" id="iddignidad" aria-label="Floating label select dignidad">                                 
+                                </select>
+                                <label for="iddignidad">Seleccione Dignidad</label>
+                            </div>
+
+                            <div class="form-floating mt-3">
+                                <select class="form-select" name="idprovincia" id="idprovincia" aria-label="Floating label select provincia">                                 
+                                </select>
+                                <label for="idprovincia">Seleccione la Provincia</label>
+                            </div>
+
+                            <div class="form-floating mt-3">
+                                <select class="form-select" name="idcanton" id="idcanton" aria-label="Floating label select canton">                                 
+                                </select>
+                                <label for="idcanton">Seleccione el Cantón</label>
+                            </div>
+
+                            <div class="form-floating mt-3">
+                                <select class="form-select" name="idparroquia" id="idparroquia" aria-label="Floating label select parroquia">                                 
+                                </select>
+                                <label for="idparroquia">Seleccione la Parroquia</label>
+                            </div>
+
+                            <div class="form-floating mt-3">
+                                <select class="form-select" name="idzona" id="idzona" aria-label="Floating label select zona">                                 
+                                </select>
+                                <label for="idzona">Seleccione la Zona</label>
+                            </div>
+
+                            <div class="form-floating mt-3">
+                                <select class="form-select" name="idjunta" id="idjunta" aria-label="Floating label select junta">                                 
+                                </select>
+                                <label for="idjunta">Seleccione la Junta</label>
+                            </div>
+                            <hr />
+                            <div class="d-grid gap-2 d-md-flex d-lg-flex justify-content-md-center mt-3">
+                                <input type="submit" name="actas" value="Digitar Acta" class="btn btn-dark" />
+                                <input type="button" id="aceptar" onclick="javascript:history.back(1)" name="Atras" value="Regresar" class="btn btn-danger" />
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
             </div>
         </form>
+        <script type="text/javascript">
+            $("#alerts-x").fadeIn(300).delay(1500).fadeOut(400);
+        </script>
     </body>
 </html>

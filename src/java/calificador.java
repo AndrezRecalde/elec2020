@@ -117,27 +117,28 @@ public class calificador extends HttpServlet {
                 if (idacta > 0) {
                     List<candidato> listaCandidatos = null;
                     //Todos los candidatos son Provinciales
-                    if (iddignidad == 1) {
+                    if (iddignidad == 1) {  //Prefectos y Viceprefectos
                         listaCandidatos = canDB.CargarxDignidadProvincial(iddignidad, idprovincia);
                     }
-                    if (iddignidad == 2) {
-                        /*cantonesDB cantDB = new cantonesDB();
-                        listaCandidatos = canDB.CargarxDignidadCantonal(iddignidad, cantDB.CargarIdCantonPadre(idcanton));*/
-                        listaCandidatos = canDB.CargarxDignidadProvincial(iddignidad, idprovincia);
+                    if (iddignidad == 2) {  //Alcaldes Municipales  /* Aqui problema cuando no se guarda en una votacion */
+                        cantonesDB cantDB = new cantonesDB();
+                        listaCandidatos = canDB.CargarxDignidadCantonal(iddignidad, cantDB.CargarIdCantonPadre(idcanton));
+                        //listaCandidatos = canDB.CargarxDignidadProvincial(iddignidad, idprovincia);
                     }
-                    if (iddignidad == 3) {
-                        /*listaCandidatos = canDB.CargarxDignidadCantonal(iddignidad, idcanton);*/
-                        listaCandidatos = canDB.CargarxDignidadProvincial(iddignidad, idprovincia);
+                    if (iddignidad == 3) {  //Concejales Urbanos
+                       listaCandidatos = canDB.CargarxDignidadCantonal(iddignidad, idcanton);
+                         /*listaCandidatos = canDB.CargarxDignidadProvincial(iddignidad, idprovincia); */
                     }
-                    if (iddignidad == 4) {
-                        /*
-                        listaCandidatos = canDB.CargarxDignidadCantonal(iddignidad, idcanton);*/
-                        listaCandidatos = canDB.CargarxDignidadProvincial(iddignidad, idprovincia);
+                    if (iddignidad == 4) {  //Concejales Rurales
+                        
+                        listaCandidatos = canDB.CargarxDignidadCantonal(iddignidad, idcanton);
+                       /* listaCandidatos = canDB.CargarxDignidadProvincial(iddignidad, idprovincia); */
                     }
-                    /*
-                    if (iddignidad == 5) {
+                    
+                    if (iddignidad == 5) {  //Juntas Parroquiales
                         listaCandidatos = canDB.CargarxDignidadParroquia(iddignidad, idparroquia);
                     }
+                    /*
                     if (iddignidad == 6 || iddignidad == 7 || iddignidad == 8) {
                         listaCandidatos = canDB.CargarxDignidadProvincial(iddignidad, idprovincia);
                     }*/
@@ -151,8 +152,8 @@ public class calificador extends HttpServlet {
                         }
                         acDB.CalificarActaCandidato(idacta, c.getIdcandidato(), v);
                     }
-                    //response.sendRedirect("dig_actas_dignidad.jsp?men=Acta de <b>" + dignidad + "</b> : <br> " + provincia + "/" + canton + "/" + parroquia + "/" + zona + "/JUNTA: " + junta + "<br><b>Ha sido ingresada con exito.</b>");
-                    response.sendRedirect("dig_actas_dignidad_junta_ver.jsp?iddignidad="+iddignidad+"&ver=edit&idjunta="+idjunta+"&men=Acta de <b>" + dignidad + "</b> : <br> " + provincia + "/" + canton + "/" + parroquia + "/" + zona + "/JUNTA: " + junta + "<br><b>Ha sido ingresada con exito.</b>");
+                    response.sendRedirect("dig_actas_dignidad.jsp?men=Acta de <b>" + dignidad + "</b> : <br> " + provincia + "/" + canton + "/" + parroquia + "/" + zona + "/JUNTA: " + junta + "<br><b>Ha sido ingresada con exito.</b>");
+                    //response.sendRedirect("dig_actas_dignidad_junta_ver.jsp?iddignidad="+iddignidad+"&ver=edit&idjunta="+idjunta+"&men=Acta de <b>" + dignidad + "</b> : <br> " + provincia + "/" + canton + "/" + parroquia + "/" + zona + "/JUNTA: " + junta + "<br><b>Ha sido ingresada con exito.</b>");
                     return;
                 } else {
                     response.sendRedirect("error.jsp?men=Notifique al administrador esta acta: " + dignidad + ": " + provincia + "/" + canton + "/" + parroquia + "/" + zona + "/" + junta + " ingresada pero con problemas.");

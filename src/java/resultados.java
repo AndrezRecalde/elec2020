@@ -134,111 +134,116 @@ public class resultados extends HttpServlet {
                 6 CPCCS */
             if (dignidad == -1) {
                 response.sendRedirect("mensaje.jsp?men=Por favor seleeciona una dignidad.");
+                //response.sendRedirect("rep_resultados.jsp?men=Por favor seleeciona una dignidad.&tipo_eleccion=" + tipo_eleccion + "&dignidad_string=" + URLEncoder.encode(dignidad_string,"utf-8") + "&tipo=" + tipo + "&total_votos=" + total_votos + "&total_actas_ingresadas=" + total_actas_ingresadas + "&total_actas=" + total_actas + "&total_actas_faltantes=" + (total_actas - total_actas_ingresadas));
                 return;
             }
+            
+            
             if (dignidad == 1) {
                 if (nivel_territorio.equals("provincial")) {
-                    nombre_reporte = "presidente_nivel_provincial_" + sdf.format(new Date());
+                    nombre_reporte = "prefecto_nivel_provincial_" + sdf.format(new Date());
                     listado = resDB.CargarBasicoProvincial(dignidad, 1);
                     total_actas = acDB.TotalJuntasProvincia();
                     total_actas_ingresadas = acDB.TotalActas(dignidad);
-                    dignidad_string = "PRESIDENTE Y VICEPRESIDENTE A NIVEL PROVINCIAL";
+                    dignidad_string = "PREFECTOS Y VICEPREFECTOS A NIVEL PROVINCIAL";
                 }
                 if (nivel_territorio.equals("cantonal")) {
 
                     if (usu_edi.getes_cantonal()) {
                         can = canDB.Seleccionar_Id(idcanton);
                         if (usu_edi.getFr_id_canton_padre() != can.getfr_id_canton_pertenece()) {
-                            response.sendRedirect("mensaje.jsp?men=Por favor seleeciona datos del cantón al que has sido asignado.");
+                            response.sendRedirect("mensaje.jsp?men=Por favor selecciona datos del cantón al que has sido asignado.");
                             return;
                         }
                     }
 
                     OBJcan = cantDB.CargarCantonId(idcanton);
-                    nombre_reporte = "presidente_nivel_cantonal_" + sdf.format(new Date());
+                    nombre_reporte = "prefecto_nivel_cantonal_" + sdf.format(new Date());
                     listado = resDB.CargarPorDignidadCantonal(dignidad, idcanton);
                     total_actas = acDB.TotalJuntasCanton(idcanton);
                     total_actas_ingresadas = acDB.TotalActasIngresadasCanton(dignidad, idcanton);
-                    dignidad_string = "PRESIDENTE Y VICEPRESIDENTE A NIVEL CANTONAL-" + OBJcan.getNombre_canton();
+                    dignidad_string = "PREFECTOS Y VICEPREFECTOS A NIVEL CANTONAL-" + OBJcan.getNombre_canton();
                 }
                 if (nivel_territorio.equals("parroquial")) {
 
                     if (usu_edi.getes_cantonal()) {
                         can = canDB.Seleccionar_Id(idcanton);
                         if (usu_edi.getFr_id_canton_padre() != can.getfr_id_canton_pertenece()) {
-                            response.sendRedirect("mensaje.jsp?men=Por favor seleeciona datos del cantón al que has sido asignado.");
+                            response.sendRedirect("mensaje.jsp?men=Por favor selecciona datos del cantón al que has sido asignado.");
                             return;
                         }
                     }
 
                     OBJparr = parrDB.CargarParroquiaId(idparroquia);
-                    nombre_reporte = "presidente_nivel_parroquial_" + sdf.format(new Date());
+                    nombre_reporte = "prefecto_nivel_parroquial_" + sdf.format(new Date());
                     listado = resDB.CargarPorDiginidadParroquial(dignidad, idparroquia);
                     total_actas = acDB.TotalJuntasParroquia(idparroquia);
                     total_actas_ingresadas = acDB.TotalActasIngresadasParroquia(dignidad, idparroquia);
-                    dignidad_string = "PRESIDENTE Y VICEPRESIDENTE A NIVEL PARROQUIAL-" + OBJparr.getNombre_parroquia();
+                    dignidad_string = "PREFECTOS Y VICEPREFECTOS A NIVEL PARROQUIAL-" + OBJparr.getNombre_parroquia();
                 }
                 if (nivel_territorio.equals("recinto")) {
 
                     if (usu_edi.getes_cantonal()) {
                         can = canDB.Seleccionar_Id(idcanton);
                         if (usu_edi.getFr_id_canton_padre() != can.getfr_id_canton_pertenece()) {
-                            response.sendRedirect("mensaje.jsp?men=Por favor seleeciona datos del cantón al que has sido asignado.");
+                            response.sendRedirect("mensaje.jsp?men=Por favor selecciona datos del cantón al que has sido asignado.");
                             return;
                         }
                     }
 
                     OBJrecinto = recDB.CargarRecintoId(idrecinto);
-                    nombre_reporte = "presidente_nivel_recinto_" + sdf.format(new Date());
+                    nombre_reporte = "prefecto_nivel_recinto_" + sdf.format(new Date());
                     listado = resDB.CargarPorDiginidadRecinto(dignidad, idrecinto);
                     total_actas = acDB.TotalJuntasRecinto(idrecinto);
                     total_actas_ingresadas = acDB.TotalActasIngresadasRecinto(dignidad, idparroquia);
-                    dignidad_string = "PRESIDENTE Y VICEPRESIDENTE A NIVEL RECINTO-" + OBJrecinto.getNombre_recinto();
+                    dignidad_string = "PREFECTOS Y VICEPREFECTOS A NIVEL RECINTO-" + OBJrecinto.getNombre_recinto();
                 }
                 tipo_eleccion = "unipersonal";
             }
-            if (dignidad == 2) { //ASAMBLEISTA PROVINCIAL
+            
+            
+            if (dignidad == 2) { //ALCALDES MUNICIPALES
                 if (nivel_territorio.equals("provincial")) {
-                    nombre_reporte = "asamb_prov_nivel_provincial_" + sdf.format(new Date());
+                    nombre_reporte = "alcalde_nivel_provincial_" + sdf.format(new Date());
                     listado = resDB.CargarBasicoProvincial(dignidad, 1);
                     total_actas = acDB.TotalJuntasProvincia();
                     total_actas_ingresadas = acDB.TotalActas(dignidad);
-                    dignidad_string = "ASAMBLEISTA PROVINCIAL A NIVEL PROVINCIAL";
+                    dignidad_string = "ALCALDE MUNICIPAL A NIVEL PROVINCIAL";
                 }
                 if (nivel_territorio.equals("cantonal")) {
 
                     if (usu_edi.getes_cantonal()) {
                         can = canDB.Seleccionar_Id(idcanton);
                         if (usu_edi.getFr_id_canton_padre() != can.getfr_id_canton_pertenece()) {
-                            response.sendRedirect("mensaje.jsp?men=Por favor seleeciona datos del cantón al que has sido asignado.");
+                            response.sendRedirect("mensaje.jsp?men=Por favor selecciona datos del cantón al que has sido asignado.");
                             return;
                         }
                     }
 
                     OBJcanPadre = cantDB.CargarCantonId(cantDB.CargarIdCantonPadre(idcanton));
                     idcanton_padre = OBJcanPadre.getCod_canton();
-                    nombre_reporte = "asamb_prov_nivel_cantonal_" + sdf.format(new Date());
+                    nombre_reporte = "alcalde_nivel_cantonal_" + sdf.format(new Date());
                     listado = resDB.CargarPorDignidadCantonalPadre(dignidad, idcanton_padre);
                     total_actas = acDB.TotalJuntasCantonPadre(idcanton_padre);
                     total_actas_ingresadas = acDB.TotalActasIngresadasPadreCanton(dignidad, idcanton_padre);
-                    dignidad_string = "ASAMBLEISTA PROVINCIAL NIVEL CANTONAL-" + OBJcanPadre.getNombre_canton();
+                    dignidad_string = "ALCALDE MUNICIPAL NIVEL CANTONAL-" + OBJcanPadre.getNombre_canton();
                 }
                 if (nivel_territorio.equals("parroquial")) {
 
                     if (usu_edi.getes_cantonal()) {
                         can = canDB.Seleccionar_Id(idcanton);
                         if (usu_edi.getFr_id_canton_padre() != can.getfr_id_canton_pertenece()) {
-                            response.sendRedirect("mensaje.jsp?men=Por favor seleeciona datos del cantón al que has sido asignado.");
+                            response.sendRedirect("mensaje.jsp?men=Por favor selecciona datos del cantón al que has sido asignado.");
                             return;
                         }
                     }
 
                     OBJparr = parrDB.CargarParroquiaId(idparroquia);
-                    nombre_reporte = "asambleista_nivel_parroquial_" + sdf.format(new Date());
+                    nombre_reporte = "alcalde_nivel_parroquial_" + sdf.format(new Date());
                     listado = resDB.CargarPorDiginidadParroquial(dignidad, idparroquia);
                     total_actas = acDB.TotalJuntasParroquia(idparroquia);
                     total_actas_ingresadas = acDB.TotalActasIngresadasParroquia(dignidad, idparroquia);
-                    dignidad_string = "ASAMBLEISTA PROVINCIAL A NIVEL PARROQUIAL-" + OBJparr.getNombre_parroquia();
+                    dignidad_string = "ALCALDE MUNICIPAL A NIVEL PARROQUIAL-" + OBJparr.getNombre_parroquia();
                 }
                 
                 if (nivel_territorio.equals("recinto")) {
@@ -246,20 +251,22 @@ public class resultados extends HttpServlet {
                     if (usu_edi.getes_cantonal()) {
                         can = canDB.Seleccionar_Id(idcanton);
                         if (usu_edi.getFr_id_canton_padre() != can.getfr_id_canton_pertenece()) {
-                            response.sendRedirect("mensaje.jsp?men=Por favor seleeciona datos del cantón al que has sido asignado.");
+                            response.sendRedirect("mensaje.jsp?men=Por favor selecciona datos del cantón al que has sido asignado.");
                             return;
                         }
                     }
 
                     OBJrecinto = recDB.CargarRecintoId(idrecinto);
-                    nombre_reporte = "asambleista_nivel_recinto_" + sdf.format(new Date());
+                    nombre_reporte = "alcalde_nivel_recinto_" + sdf.format(new Date());
                     listado = resDB.CargarPorDiginidadRecinto(dignidad, idrecinto);
                     total_actas = acDB.TotalJuntasRecinto(idrecinto);
                     total_actas_ingresadas = acDB.TotalActasIngresadasRecinto(dignidad, idparroquia);
-                    dignidad_string = "ASAMBLEISTA PROVINCIAL A NIVEL RECINTO-" + OBJrecinto.getNombre_recinto();
+                    dignidad_string = "ALCALDE MUNICIPAL A NIVEL RECINTO-" + OBJrecinto.getNombre_recinto();
                 }
                 tipo_eleccion = "unipersonal";
             }
+            
+            
             if (dignidad == 3) { //Urbanos
                 if (nivel_territorio.equals("provincial")) {
                     //No hay resultados provinciales para alcaldes
@@ -270,7 +277,7 @@ public class resultados extends HttpServlet {
                     if (usu_edi.getes_cantonal()) {
                         can = canDB.Seleccionar_Id(idcanton);
                         if (usu_edi.getFr_id_canton_padre() != can.getfr_id_canton_pertenece()) {
-                            response.sendRedirect("mensaje.jsp?men=Por favor seleeciona datos del cantón al que has sido asignado.");
+                            response.sendRedirect("mensaje.jsp?men=Por favor selecciona datos del cantón al que has sido asignado.");
                             return;
                         }
                     }
@@ -288,7 +295,7 @@ public class resultados extends HttpServlet {
                     if (usu_edi.getes_cantonal()) {
                         can = canDB.Seleccionar_Id(idcanton);
                         if (usu_edi.getFr_id_canton_padre() != can.getfr_id_canton_pertenece()) {
-                            response.sendRedirect("mensaje.jsp?men=Por favor seleeciona datos del cantón al que has sido asignado.");
+                            response.sendRedirect("mensaje.jsp?men=Por favor selecciona datos del cantón al que has sido asignado.");
                             return;
                         }
                     }
@@ -314,7 +321,7 @@ public class resultados extends HttpServlet {
                     if (usu_edi.getes_cantonal()) {
                         can = canDB.Seleccionar_Id(idcanton);
                         if (usu_edi.getFr_id_canton_padre() != can.getfr_id_canton_pertenece()) {
-                            response.sendRedirect("mensaje.jsp?men=Por favor seleeciona datos del cantón al que has sido asignado.");
+                            response.sendRedirect("mensaje.jsp?men=Por favor selecciona datos del cantón al que has sido asignado.");
                             return;
                         }
                     }
@@ -332,7 +339,7 @@ public class resultados extends HttpServlet {
                     if (usu_edi.getes_cantonal()) {
                         can = canDB.Seleccionar_Id(idcanton);
                         if (usu_edi.getFr_id_canton_padre() != can.getfr_id_canton_pertenece()) {
-                            response.sendRedirect("mensaje.jsp?men=Por favor seleeciona datos del cantón al que has sido asignado.");
+                            response.sendRedirect("mensaje.jsp?men=Por favor selecciona datos del cantón al que has sido asignado.");
                             return;
                         }
                     }
@@ -347,7 +354,7 @@ public class resultados extends HttpServlet {
                 }
                 tipo_eleccion = "pluripersonal";
             }
-            /*
+           
             if (dignidad == 5) { //Vocales de Juntas Parroquiales
                 if (nivel_territorio.equals("provincial")) {
                     //No hay resultados provinciales para alcaldes
@@ -361,7 +368,7 @@ public class resultados extends HttpServlet {
                     if (usu_edi.getes_cantonal()) {
                         can = canDB.Seleccionar_Id(idcanton);
                         if (usu_edi.getFr_id_canton_padre() != can.getfr_id_canton_pertenece()) {
-                            response.sendRedirect("mensaje.jsp?men=Por favor seleeciona datos del cantón al que has sido asignado.");
+                            response.sendRedirect("mensaje.jsp?men=Por favor selecciona datos del cantón al que has sido asignado.");
                             return;
                         }
                     }
@@ -376,6 +383,7 @@ public class resultados extends HttpServlet {
                 }
                 tipo_eleccion = "pluripersonal";
             }
+             /*
             if (dignidad == 6 || dignidad == 7 || dignidad == 8) {
                 if (nivel_territorio.equals("provincial")) {
                     nombre_reporte = "cpccs_nivel_provincial_" + sdf.format(new Date());

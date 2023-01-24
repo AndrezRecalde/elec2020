@@ -8,11 +8,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Sistema de Control Electoral</title>
 
-        <link href="styles/basic.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href="styles/basic.css" rel="stylesheet" type="text/css" media="screen" /> 
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+
 
         <style type="text/css">
             .bs-example{
@@ -22,9 +27,18 @@
                 width: 100%;
                 height: 100%;
                 position: absolute;
-                top: 50px
+                top: 55px;
+            }
+            .position {
+                z-index: 1;
+            }
+            .img-avatar {
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
             }
         </style>
+
 
         <%
             if (session.getAttribute("tipo_usuario") == null) {
@@ -35,92 +49,123 @@
     </head> 
     <body>
         <!-- Fixed navbar -->
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="principal.jsp"><img src="images/logo_up.png" height="30px"></a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="principal.jsp">Home</a></li>
-                            <% if (session.getAttribute("tipo_usuario").toString().equals("1")
-                                        || session.getAttribute("tipo_usuario").toString().equals("2")
-                                        || session.getAttribute("tipo_usuario").toString().equals("3")) { %>
-                        <li><a href="dig_actas_dignidad.jsp" target="dynamic">Digitaci&oacute;n</a></li>
-                            <% } %>
-                            <% if (session.getAttribute("tipo_usuario").toString().equals("5")) { %>
-                        <li><a href="dig_actas_dignidad.jsp" target="dynamic">Conteo R&aacute;pido</a></li>
-                            <% } %>
-                        <% if (session.getAttribute("tipo_usuario").toString().equals("1")
-                                            || session.getAttribute("tipo_usuario").toString().equals("2")) { %>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Log&iacute;stica<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown-header">Juntas</li>
-                                <li><a href="jun_responsable.jsp" style="text-decoration: none" target="dynamic">Delegados JRV</a></li>
-                                <li><a href="admin/admin_controlador.srvlt_junta_listar_todos" style="text-decoration: none" target="dynamic">Listar JRV</a></li>
-                                <li class="dropdown-header">Recintos</li>
-                                <li><a href="admin/admin_controlador.srvlt_recintos_listar_todos" style="text-decoration: none" target="dynamic">Coordinadores Recintos</a></li>
-                            </ul>
+        <div class="container-fluid position">
+
+            <nav class="navbar navbar-expand-lg bg-light navbar-fixed-top">
+                <!-- <a class="navbar-brand" href="#">Elecciones</a> -->
+                <img class="img-avatar me-5" src="images/logo.png"/>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="principal.jsp">Inicio</a>
                         </li>
+                        <% if (session.getAttribute("tipo_usuario").toString().equals("1")
+                                    || session.getAttribute("tipo_usuario").toString().equals("2")
+                                    || session.getAttribute("tipo_usuario").toString().equals("3")) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="dig_actas_dignidad.jsp" target="dynamic">Digitación</a>
+                        </li>          
                         <% } %>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Preferencias<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="cambiar_contrasena.jsp" style="text-decoration: none" target="dynamic">Cambiar Contrase&ntilde;a</a></li>
-                            </ul>
-                        </li>
+
+                        <% if (session.getAttribute("tipo_usuario").toString().equals("5")) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="dig_actas_dignidad.jsp" target="dynamic">Digitación</a>
+                        </li> 
+                        <% } %>
+
+                        <!-- Inicio de Logistica de Delegados -->
+
+                        <%-- if (session.getAttribute("tipo_usuario").toString().equals("1")
+                                    || session.getAttribute("tipo_usuario").toString().equals("2")) { --%> 
+                        <!--  <li class="nav-item dropdown">
+                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                 Logística
+                             </a>
+                             <ul class="dropdown-menu">
+                                 <li class="dropdown-header">Juntas</li>
+                                 <li><a class="dropdown-item" href="jun_responsable.jsp" target="dynamic">Delegados JRV</a></li>
+                                 <li><a class="dropdown-item" href="resultados_juntas?op=avance_responsables" target="dynamic">Delegados JRV</a></li>
+                                 <li><a class="dropdown-item" href="admin/admin_controlador.srvlt_junta_listar_todos" target="dynamic">Listar JRV</a></li>
+                                 <li><hr class="dropdown-divider"></li>
+                                 <li class="dropdown-header">Recintos</li>
+                                 <li><a class="dropdown-item" href="admin/admin_controlador.srvlt_recintos_listar_todos" target="dynamic">Coordinadores de Recinto</a></li>
+                                 <li class="dropdown-header">PDF</li>
+                                 <li><a class="dropdown-item" href="responsables_pdf.jsp?tipo=pdf">Delegados CNE</a></li>
+ 
+                             </ul>
+                         </li> -->
+                        <%-- } --%> 
+
+                        <!-- Fin de Logistica de Delegados -->
+
                         <% if (session.getAttribute("tipo_usuario").toString().equals("1")
-                                            || session.getAttribute("tipo_usuario").toString().equals("2")
-                                            || session.getAttribute("tipo_usuario").toString().equals("4")) { %>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reportes<span class="caret"></span></a>
+                                    || session.getAttribute("tipo_usuario").toString().equals("2")
+                                    || session.getAttribute("tipo_usuario").toString().equals("4")) { %>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Reportes
+                            </a>
                             <ul class="dropdown-menu">
-                                <li class="dropdown-header">Avances y Resultados</li>
-                                <li><a href="resultados_juntas?op=avance_escrutinio" style="text-decoration: none" target="dynamic">Escrutinio</a></li>
-                                <li><a href="resultados_juntas?op=avance_responsables" style="text-decoration: none" target="dynamic">Delegados JRV</a></li>
-                                <li><a href="resultados?iddignidad=1&idcanton=1&idparroquia=1&idrecinto=1&nivel_territorio_prov_jsp=" style="text-decoration: none" target="dynamic">Resultados</a></li>
-                                <li><a href="webster?iddignidad=2" style="text-decoration: none" target="dynamic">Webster</a></li>
-                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Avances & Resultados</li>
+                                <li><a class="dropdown-item" href="resultados_juntas?op=avance_escrutinio" target="dynamic">Escrutinio</a></li>
+                                <li><a class="dropdown-item" href="resultados?iddignidad=1&idcanton=1&idparroquia=1&idrecinto=1&nivel_territorio_prov_jsp=" target="dynamic">Resultados</a></li>
+                                <!-- <li><a class="dropdown-item" href="webster?iddignidad=3" target="dynamic">Webster</a></li> -->
+
+                                <li><hr class="dropdown-divider"></li>
                                 <li class="dropdown-header">Actas</li>
-                                <li><a href="admin/admin_controlador.srvlt_acta_listar_todos?op=inc" style="text-decoration: none" target="dynamic">Inconsistentes</a></li>
-                                <li><a href="admin/admin_controlador.srvlt_acta_listar_todos?op=tod" style="text-decoration: none" target="dynamic">Ingresadas</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">PDF</li>
-                                <li><a href="responsables_pdf.jsp?tipo=pdf" style="text-decoration: none" target="dynamic">Delegados CNE</a></li>
+                                <li><a class="dropdown-item" href="admin/admin_controlador.srvlt_acta_listar_todos?op=inc" target="dynamic">Inconsistentes</a></li>
+                                <li><a class="dropdown-item" href="admin/admin_controlador.srvlt_acta_listar_todos?op=tod" target="dynamic">Ingresadas</a></li>
+
                             </ul>
                         </li>
-                        <% }%>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Websters
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Reportes Webster</li>                              
+                                <li><a class="dropdown-item" href="webster?iddignidad=3" target="dynamic">Concejales Urbanos C1</a></li>
+                                <li><a class="dropdown-item" href="websterc2?iddignidad=3" target="dynamic">Concejales Urbanos C2</a></li>
+                            </ul>
+                        </li>
+
+
+                        <% }%>                     
                         <% if (session.getAttribute("tipo_usuario").toString().equals("1")) { %>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administrar<span class="caret"></span></a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Administrar
+                            </a>
                             <ul class="dropdown-menu">
-                                <li><a href="admin/admin_controlador.srvlt_usuario_listar_todos" style="text-decoration: none" target="dynamic">Usuarios</a></li>
-                                <li><a href="admin/admin_controlador.srvlt_accesos_listar_todos?op=todos" style="text-decoration: none" target="dynamic">Accesos</a></li>
-                                <li><a href="admin/admin_controlador.srvlt_acta_images_listar_todos?op=todos" style="text-decoration: none" target="dynamic">Im&aacute;genes de Actas</a></li>
+                                <li><a class="dropdown-item" href="admin/admin_controlador.srvlt_usuario_listar_todos" target="dynamic">Usuarios</a></li>
+                                <li><a class="dropdown-item" href="admin/admin_controlador.srvlt_accesos_listar_todos?op=todos" target="dynamic">Accesos</a></li>
+                                <li><a class="dropdown-item" href="admin/admin_controlador.srvlt_acta_images_listar_todos?op=todos" target="dynamic">Imágenes de Actas</a></li>
                             </ul>
                         </li>
                         <% }%>
-                        <li class="dropdown"> 
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ing. Dubal Quevedo.<span class="caret"></span></a>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <%= session.getAttribute("usuario")%>
+                            </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#" style="text-decoration: none"><b>Creado por:</b> Ing. Dubal Quevedo<br><b>Telf:</b> 0969655372</a></li>
+                                <li><a class="dropdown-item" href="cambiar_contrasena.jsp" target="dynamic">Cambiar Contraseña</a></li>
+
+                                <li><hr class="dropdown-divider"></li>
+
+                                <li><a class="dropdown-item" href="./salir.jsp">Salir</a></li>
                             </ul>
                         </li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#"><%= session.getAttribute("usuario")%><span class="sr-only">(current)</span></a></li>
-                        <li class="active"><a href="./salir.jsp">Salir<span class="sr-only">(current)</span></a></li>
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </nav>
+                </div>
+            </nav>
+        </div>
 
         <div class="main_cont">
             <iframe src="welcome.jsp" style="width: 100%;height: 100%;" name="dynamic">

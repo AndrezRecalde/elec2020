@@ -21,25 +21,38 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Avacne de Escrutinio</title>
+        <title>Avance de Escrutinio</title>
 
-        <link href="styles/generales.css" rel="stylesheet" type="text/css" media="screen" />
-        <link href="styles/basic.css" rel="stylesheet" type="text/css" media="screen" />
+        <!-- <link href="styles/generales.css" rel="stylesheet" type="text/css" media="screen" /> -->
+        <!-- <link href="styles/basic.css" rel="stylesheet" type="text/css" media="screen" /> -->
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        <script type="text/javascript" src="includes/jquery-1.8.2.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
 
+        <!-- <script type="text/javascript" src="includes/jquery-1.8.2.min.js"></script> -->
+        
         <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://code.highcharts.com/modules/data.js"></script>
-        <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="includes/TableFilter/filtergrid.css" media="screen" />
+         <!-- <link rel="stylesheet" type="text/css" href="includes/TableFilter/filtergrid.css" media="screen" /> -->
         <script type="text/javascript" src="includes/TableFilter/tablefilter.js"></script>
+        
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+        <style type="text/css">
+            select {
+                height: 30px;
+            }
+            input {
+                height: 30px;
+            }
+        </style>
 
     </head>
     <body>
@@ -50,7 +63,7 @@
             ArrayList<ClassResultadosAvanceEscrutinio> listado_avance_dignidades = (ArrayList<ClassResultadosAvanceEscrutinio>) session.getAttribute("listado_avance_dignidades");
         %>
         <section class="content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row clearfix">
                     <div class="col-sm-12">
                         <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
@@ -84,7 +97,7 @@
                                         positioner: function(){
                                             return { header:true };
                                         },
-                                        headerFormat: '<span style="font-size:10px">{point.key}</span><table><td><b>Dignidad</b></td><td><b>Ing.</b></td><td><b>Tot. Jun.</b></td><td><b>%</b></td>',
+                                        headerFormat: '<span style="font-size:10px">{point.key}</span><table><td><b>Dignidad</b></td><td><b>Ing.</b></td><td><b>Tot. Jun.</b></td><td><b>&nbsp&nbsp%</b></td>',
                                         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
                                                 '<td style="padding:0"><b>{point.val}</b></td><td style="padding:0"><b>{point.val2}</b></td><td style="padding:0"><b>{point.y:.2f}</b></td></tr>',
                                         footerFormat: '</table>',
@@ -126,10 +139,10 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid">
-                <div class="row clearfix">
-                    <div class="col-sm-12">
-                        <table id="lista_table_filter_avance_escrutinio" class="table table-hover text-centered">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                        <table id="lista_table_filter_avance_escrutinio" class="table table-bordered table-responsive-xl table-success">
                             <thead>
                                 <tr>
                                     <td><b>CANTON</b></td>
@@ -178,7 +191,7 @@
                                 col_2: "input",
                                 col_3: "input",
                                 col_4: "none",
-                                display_all_text: "<TODOS>",
+                                display_all_text: "TODOS",
                                 loader: true,
                                 loader_css_class: "myLoader",
                                 loader_html: '<img src="includes/TableFilter/loader.gif" alt="" style="vertical-align:middle; margin-right:5px;">Cargando...'

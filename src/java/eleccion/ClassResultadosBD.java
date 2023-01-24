@@ -35,7 +35,7 @@ public class ClassResultadosBD {
                     + " inner join parroquias as pa on ac.cod_parroquia=pa.cod_parroquia"
                     + " inner join cantones as cn on cn.cod_canton=pa.cod_canton"
                     + " where di.iddignidad=" + id_dignidad + " and ca.fr_id_provincia=8 "
-                    + " group by ad.fr_id_candidato order by org.orden asc;";
+                    + " group by ad.fr_id_candidato order by total_votos desc;";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             //System.out.print(sql);
@@ -113,7 +113,7 @@ public class ClassResultadosBD {
         Connection con = null;
         try {
             con = conexion.getConexion();
-            String sql = "select di.nombre_dignidad,ca.nombre,org.lista,org.color,org.siglas,"
+            String sql = "select di.nombre_dignidad,ca.nombre,org.lista,org.idorganizacion,org.color,org.siglas,"
                     + " sum(num_votos) as total_votos, sum(ac.num_validos) as total_votos_validos,"
                     + " sum(ac.num_no_voto) as total_votos_no_voto ,sum(ac.num_blancos) as total_votos_blancos"
                     + " ,sum(ac.num_nulos) as total_votos_nulos"
@@ -128,12 +128,13 @@ public class ClassResultadosBD {
                     + " inner join cantones as cn on cn.cod_canton=pa.cod_canton"
                     + " where di.iddignidad=" + id_dignidad + " and cn.cod_canton=" + idcanton
                     + " group by ad.fr_id_candidato"
-                    + " order by org.orden asc;";
+                    + " order by total_votos desc;";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             //System.out.print(sql);
             while (rs.next()) {
                 ClassResultadosBasico OBJ = new ClassResultadosBasico();
+                OBJ.setIdorganizacion(rs.getInt("idorganizacion"));
                 OBJ.setNombre(rs.getString("nombre"));
                 OBJ.setColor(rs.getString("color"));
                 OBJ.setListas(rs.getString("lista"));
@@ -304,22 +305,22 @@ public class ClassResultadosBD {
         try {
             con = conexion.getConexion();
             String sql = "select di.nombre_dignidad,ca.nombre,org.lista,org.color,org.nombre_organizacion,org.siglas,"
-                    + " sum(num_votos) as total_votos, sum(ac.num_validos) as total_votos_validos,"
+                    + " sum(ad.num_votos) as total_votos, sum(ac.num_validos) as total_votos_validos,"
                     + " sum(ac.num_no_voto) as total_votos_no_voto ,sum(ac.num_blancos) as total_votos_blancos"
                     + " ,sum(ac.num_nulos) as total_votos_nulos"
                     + " from  acta_detalle as ad"
-                    + " inner join acta as ac on ad.fr_id_acta=ac.idacta"
+                    + " inner join acta as ac on ad.fr_id_acta = ac.idacta"
                     + " inner join dignidad as di on ac.fr_id_dignidad = di.iddignidad"
-                    + " inner join candidato as ca on ad.fr_id_candidato=ca.idcandidato "
-                    + " inner join organizacion as org on org.idorganizacion=ca.fr_id_organizacion "
-                    + " inner join junta as ju on ju.idjunta=ac.fr_id_junta"
-                    + " inner join zonas as z on z.idzonas=ac.cod_zona"
-                    + " inner join parroquias as pa on ac.cod_parroquia=pa.cod_parroquia"
-                    + " inner join cantones as cn on cn.cod_canton=pa.cod_canton"
-                    + " inner join recintos as re on re.cod_parroquia=pa.cod_parroquia" 
+                    + " inner join candidato as ca on ad.fr_id_candidato = ca.idcandidato "
+                    + " inner join organizacion as org on org.idorganizacion = ca.fr_id_organizacion "
+                    + " inner join junta as ju on ju.idjunta = ac.fr_id_junta"
+                    + " inner join zonas as z on z.idzonas = ac.cod_zona"
+                    + " inner join parroquias as pa on ac.cod_parroquia = pa.cod_parroquia"
+                    + " inner join cantones as cn on cn.cod_canton = pa.cod_canton"
+                    + " inner join recintos as re on re.cod_recinto = ju.cod_recinto" 
                     + " where di.iddignidad=" + iddignidad + " and re.cod_recinto=" + idrecinto
                     + " group by ad.fr_id_candidato"
-                    + " order by org.orden asc;";
+                    + " order by total_votos DESC;";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             //System.out.print(sql);

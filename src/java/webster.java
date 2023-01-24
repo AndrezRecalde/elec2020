@@ -77,12 +77,14 @@ public class webster extends HttpServlet {
             usu_edi = usuDB.Seleccionar_Id(Integer.parseInt(session.getAttribute("idusuario").toString()));
             
 
-            if (dignidad == 2) {
-                nombre_reporte = "asambleista_webster" + sdf.format(new Date());
-                listado = resDB.CargarBasicoProvincialEscanio(dignidad, 1);
-                total_actas = acDB.TotalJuntasProvincia();
+            if (dignidad == 3) {
+                nombre_reporte = "concejales_urbanos_webster" + sdf.format(new Date());
+                //listado = resDB.CargarBasicoProvincialEscanio(dignidad, 1);
+                listado = resDB.CargarPorDignidadCantonal(dignidad, 4);
+                //total_actas = acDB.TotalJuntasProvincia();
+                total_actas = acDB.TotalJuntasCanton(4);
                 total_actas_ingresadas = acDB.TotalActas(dignidad);
-                dignidad_string = "REPARTICIÓN DE ESCAÑOS - MÉTODO WEBSTER";
+                dignidad_string = "Repartición de Escaños - Método Webster";
                 tipo_eleccion = "unipersonal";
             }
 
@@ -106,32 +108,34 @@ public class webster extends HttpServlet {
 
                 out.write("<table>");
                 out.write("<tr>");
-                out.write("<td>DIGNIDAD</td>");
-                out.write("<td>LISTA</td>");
-                out.write("<td>CANDIDATO</td>");
-                out.write("<td>TOTAL DE VOTOS</td>");
-                out.write("<td>NUM. VOTOS VALIDOS</td>");
-                out.write("<td>NUM. NO VOTO.</td>");
-                out.write("<td>NUM. VOTOS BLANCOS.</td>");
-                out.write("<td>NUM. VOTOS NULOS.</td>");
+                    out.write("<td>DIGNIDAD</td>");
+                    out.write("<td>LISTA</td>");
+                    out.write("<td>CANDIDATO</td>");
+                    out.write("<td>TOTAL DE VOTOS</td>");
+                    out.write("<td>NUM. VOTOS VALIDOS</td>");
+                    out.write("<td>NUM. NO VOTO.</td>");
+                    out.write("<td>NUM. VOTOS BLANCOS.</td>");
+                    out.write("<td>NUM. VOTOS NULOS.</td>");
                 out.write("</tr>");
                 int total_votos = 0;
                 for (ClassResultadosBasico r : listado) {
                     total_votos = total_votos + r.getTotal_votos();
                     out.write("<tr>");
-                    out.write("<td>" + r.getNombre_dignidad() + "</td>");
-                    out.write("<td>" + r.getListas() + "</td>");
-                    out.write("<td>" + r.getNombre() + "</td>");
-                    out.write("<td>" + r.getTotal_votos() + "</td>");
-                    out.write("<td>" + r.getTotal_votos_validos() + "</td>");
-                    out.write("<td>" + r.getTotal_votos_no_voto() + "</td>");
-                    out.write("<td>" + r.getTotal_votos_blancos() + "</td>");
-                    out.write("<td>" + r.getTotal_votos_nulos() + "</td>");
+                        out.write("<td>" + r.getNombre_dignidad() + "</td>");
+                        out.write("<td>" + r.getListas() + "</td>");
+                        out.write("<td>" + r.getNombre() + "</td>");
+                        out.write("<td>" + r.getTotal_votos() + "</td>");
+                        out.write("<td>" + r.getTotal_votos_validos() + "</td>");
+                        out.write("<td>" + r.getTotal_votos_no_voto() + "</td>");
+                        out.write("<td>" + r.getTotal_votos_blancos() + "</td>");
+                        out.write("<td>" + r.getTotal_votos_nulos() + "</td>");
                     out.write("</tr>");
                 }
                 out.write("<tr>");
-                out.write("<td></td><td></td><td>SUMAN:</td><td>" + total_votos + "</td>");
+                    out.write("<td></td><td></td><td>SUMAN:</td><td>" + total_votos + "</td>");
                 out.write("</tr>");
+                
+                
                 if (dignidad == 1) {
                     out.write("<tr></tr>");
                     out.write("<tr></tr>");
@@ -140,19 +144,21 @@ public class webster extends HttpServlet {
                     out.write("<tr>");
                     out.write("<td>");
                     out.write("</td>");
-                    out.write("<td>ACTAS INGRESADAS</td><td>" + acDB.TotalActas(dignidad) + "</td>");
+                        out.write("<td>ACTAS INGRESADAS</td><td>" + acDB.TotalActas(dignidad) + "</td>");
                     out.write("</tr>");
                     out.write("<tr>");
                     out.write("<td>");
                     out.write("</td>");
-                    out.write("<td>ACTAS FALTANTES</td><td>" + (acDB.TotalJuntasProvincia() - acDB.TotalActas(dignidad)) + "</td>");
+                        out.write("<td>ACTAS FALTANTES</td><td>" + (acDB.TotalJuntasProvincia() - acDB.TotalActas(dignidad)) + "</td>");
                     out.write("</tr>");
                     out.write("<tr>");
                     out.write("<td>");
                     out.write("</td>");
-                    out.write("<td>ACTAS TOTALES</td><td>" + acDB.TotalJuntasProvincia() + "</td>");
+                        out.write("<td>ACTAS TOTALES</td><td>" + acDB.TotalJuntasProvincia() + "</td>");
                     out.write("</tr>");
                 }
+                
+                
                 out.write("</table>");
             }
             out.close();

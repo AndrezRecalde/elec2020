@@ -182,7 +182,7 @@ public class UploadFile extends HttpServlet {
                     // poner respuesta = false; si existe alguna problema
                     e.printStackTrace();
                     out.println(e.toString());
-                    response.sendRedirect("perfil.jsp?men=Ups! La imagen que quieres subir es muy grande....");
+                    response.sendRedirect("mensaje.jsp?men=Ups! La imagen que quieres subir es muy grande....");
                     return;
                 }
             }

@@ -13,22 +13,38 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Datos-Actas</title>
-        <link href="../styles/generales.css" rel="stylesheet" type="text/css" media="screen" />
-        <link href="../styles/basic.css" rel="stylesheet" type="text/css" media="screen" />
+        <!-- <link href="../styles/generales.css" rel="stylesheet" type="text/css" media="screen" /> -->
+        <!-- <link href="../styles/basic.css" rel="stylesheet" type="text/css" media="screen" /> -->
 
         <link rel="stylesheet" type="text/css" href="../includes/TableFilter/filtergrid.css" media="screen" />
         <script type="text/javascript" src="../includes/TableFilter/tablefilter.js"></script>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+        
+        <style type="text/css">
+            select {
+                height: 30px;
+            }
+            input {
+                height: 30px;
+            }
+        </style>
     </head>
     <body>
-        <% SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss"); %>
-        <form name="form1">
-            <center>            
-                <div>
-                    <button disabled="true" class="boton"><a href="admin_controlador.srvlt_acta_listar_todos?op=<%=request.getParameter("op") %>">Refrescar</a></button>
-                    <button disabled="true" class="boton"><a href="javascript:history.back(1)">Regresar</a></button>
+        <% SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");%>
+        <div class="container"> 
+            <form name="form1">
+
+                <div class="mt-3 mb-3">
+                    <a class="btn btn-dark" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="admin_controlador.srvlt_acta_listar_todos?op=<%=request.getParameter("op")%>">Refrescar</a>
+                    <a class="btn btn-info" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="javascript:history.back(1)">Regresar</a>
                 </div>
                 <div class="contenedor_tabla">     
-                    <h3><%= request.getParameter("tit") %></h3>
+                    <h3><%= request.getParameter("tit")%></h3>
                     <table id="lista_table_filter_acta" class="clsTablaDatos form_style">
                         <thead>
                             <tr>               
@@ -55,7 +71,7 @@
                                 ArrayList<Cacta> lista = (ArrayList<Cacta>) session.getAttribute("lista_acta");
                                 for (Cacta c : lista) {
                             %>
-                            <tr ondblclick="document.location ='../dig_actas_dignidad_junta_ver.jsp?iddignidad=<%= c.getfr_id_dignidad() %>&idprovincia=<%= c.getcod_provincia() %>&idcanton=<%= c.getcod_canton() %>&idparroquia=<%= c.getcod_parroquia() %>&idzona=<%= c.getcod_zona() %>&idjunta=<%= c.getfr_id_junta() %>&ver=ver&dignidad=<%= c.getDignidad_string() %>&provincia=ESMERALDAS&canton=<%= c.getCanton_string() %>&parroquia=<%= c.getParroquia_string() %>&zona=<%= c.getZonas_string() %>&junta=<%= c.getjunta_string() %>'">
+                            <tr ondblclick="document.location = '../dig_actas_dignidad_junta_ver.jsp?iddignidad=<%= c.getfr_id_dignidad()%>&idprovincia=<%= c.getcod_provincia()%>&idcanton=<%= c.getcod_canton()%>&idparroquia=<%= c.getcod_parroquia()%>&idzona=<%= c.getcod_zona()%>&idjunta=<%= c.getfr_id_junta()%>&ver=ver&dignidad=<%= c.getDignidad_string()%>&provincia=ESMERALDAS&canton=<%= c.getCanton_string()%>&parroquia=<%= c.getParroquia_string()%>&zona=<%= c.getZonas_string()%>&junta=<%= c.getjunta_string()%>'">
                                 <td><%= c.getCanton_string()%></td>        
                                 <td><%= c.getParroquia_string()%></td>   
                                 <td><%= c.getZonas_string()%></td>   
@@ -69,10 +85,10 @@
                                 <td><%= c.getnum_nulos()%></td>               
                                 <td><% if (c.getcuadrada()) {%>SI<%} else {%>NO<%}%></td>               
                                 <td><% if (c.getlegible()) {%>SI<%} else {%>NO<%}%></td>               
-                                <td><%= c.getActa_usu_ing_string() %></td>               
+                                <td><%= c.getActa_usu_ing_string()%></td>               
                                 <td><%= sdf.format(c.getacta_fi())%></td>               
                                 <td>
-                                    <a class="boton active" title="Ver Acta" href="../dig_actas_dignidad_junta_ver.jsp?iddignidad=<%= c.getfr_id_dignidad() %>&idprovincia=<%= c.getcod_provincia() %>&idcanton=<%= c.getcod_canton() %>&idparroquia=<%= c.getcod_parroquia() %>&idzona=<%= c.getcod_zona() %>&idjunta=<%= c.getfr_id_junta() %>&ver=ver&dignidad=<%= c.getDignidad_string() %>&provincia=ESMERALDAS&canton=<%= c.getCanton_string() %>&parroquia=<%= c.getParroquia_string() %>&zona=<%= c.getZonas_string() %>&junta=<%= c.getjunta_string() %>">Ver</a>
+                                    <a class="boton active" title="Ver Acta" href="../dig_actas_dignidad_junta_ver.jsp?iddignidad=<%= c.getfr_id_dignidad()%>&idprovincia=<%= c.getcod_provincia()%>&idcanton=<%= c.getcod_canton()%>&idparroquia=<%= c.getcod_parroquia()%>&idzona=<%= c.getcod_zona()%>&idjunta=<%= c.getfr_id_junta()%>&ver=ver&dignidad=<%= c.getDignidad_string()%>&provincia=ESMERALDAS&canton=<%= c.getCanton_string()%>&parroquia=<%= c.getParroquia_string()%>&zona=<%= c.getZonas_string()%>&junta=<%= c.getjunta_string()%>">Ver</a>
                                     <%
                                         }
                                     %>
@@ -104,7 +120,7 @@
                             col_13: "select",
                             col_14: "input",
                             col_15: "none",
-                            display_all_text: "<TODOS>",
+                            display_all_text: "TODOS",
                             loader: true,
                             loader_css_class: "myLoader",
                             loader_html: '<img src="../includes/TableFilter/loader.gif" alt="" style="vertical-align:middle; margin-right:5px;">Cargando...'
@@ -112,7 +128,7 @@
                         var tf03 = setFilterGrid("lista_table_filter_acta", table3Filters);
                     </script> 
                 </div>
-            </center>
-        </form>
+            </form>
+        </div>
     </body>
 </html>

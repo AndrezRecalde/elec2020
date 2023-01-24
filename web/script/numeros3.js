@@ -48,9 +48,29 @@ function verifica_acta(total_candidatos, num_cand_lista)
     var v4 = parseInt(document.getElementById("txt_total_votos").value);
     var acu = 0;
 
+    /*$(document).on("click", "#aceptar", function (e) {
+     $('body').removeClass('timer-alert');
+     var message = $("#message").val();
+     var title = $("#title").val();
+     if (document.getElementById('txt_total_votos').value == '') {
+     if (message == "") {
+     message = 'Por favor ingrese el total de huellas o firmas.';
+     title = "Error";
+     document.getElementById("aceptar").disabled = false;
+     return;
+     }
+     }
+     
+     swal(title, message);
+     });*/
+
     //No vacíos
-    if (document.getElementById('txt_total_votos').value == '') {
-        alert('Por favor ingrese el total de huellas o firmas.');
+    if (document.getElementById('txt_total_votos').value == '') {      
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!'
+        })
         document.getElementById("aceptar").disabled = false;
         return;
     }
@@ -67,7 +87,7 @@ function verifica_acta(total_candidatos, num_cand_lista)
     for (i = 1; i <= total_candidatos; i++)
     {
         if (document.getElementById(i).value == '') {
-            document.getElementById(i).value='0';
+            document.getElementById(i).value = '0';
         }
     }
     //Fin no vacíos

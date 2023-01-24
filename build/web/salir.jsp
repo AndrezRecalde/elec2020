@@ -16,12 +16,19 @@
         
         <title>Salir</title>
         <script type="text/javascript">
-            function breakout() {
-                window.open('','_self').close();
-            }
+            
         </script>
     </head>
     <body onload="breakout()">
-        
+        <%
+            try {
+                session.setAttribute("idusuario", null);
+                session.setAttribute("usuario", null);
+                
+                response.sendRedirect("/elecciones/index.jsp");
+            } catch (Exception e) {
+
+            }
+        %>
     </body>
 </html>

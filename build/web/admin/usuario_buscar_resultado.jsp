@@ -10,18 +10,25 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Control Electoral-usuario</title>
-        <link href="../styles/generales.css" rel="stylesheet" type="text/css" media="screen" />
-        <link href="../styles/basic.css" rel="stylesheet" type="text/css" media="screen" />
+        <!--  <link href="../styles/generales.css" rel="stylesheet" type="text/css" media="screen" /> -->
+        <!-- <link href="../styles/basic.css" rel="stylesheet" type="text/css" media="screen" /> -->
+        
+         <!-- Bootstrap 5.2 -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
 
     </head>
     <body>
         <form name="form1" action="admin_controlador.srvlt_usuario_insert">      
             <center>
                 <div>
-                    <button disabled="true" class="boton"><a href="usuario_ingresar.jsp">Nuevo</a></button>
-                    <button disabled="true" class="boton"><a href="admin_controlador.srvlt_usuario_listar_todos">Listar Todos</a></button>
-                    <button disabled="true" class="boton"><a href="javascript:history.back(1)">Cancelar</a>
-                    </button>
+                    <a class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="usuario_ingresar.jsp">Nuevo</a>
+                    <a class="btn btn-dark" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="admin_controlador.srvlt_usuario_listar_todos">Listar Todos</a>
+                    <a class="btn btn-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" href="javascript:history.back(1)">Cancelar</a>
+                    
                 </div>      
                 <div class="contenedor_tabla">
                     <table class="clsTablaDatos form_style">
