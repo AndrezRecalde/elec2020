@@ -128,8 +128,8 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Reportes Webster</li>                              
-                                <li><a class="dropdown-item" href="webster?iddignidad=3" target="dynamic">Concejales Urbanos C1</a></li>
-                                <li><a class="dropdown-item" href="websterc2?iddignidad=3" target="dynamic">Concejales Urbanos C2</a></li>
+                                <li><a class="dropdown-item" href="http://134.209.33.125/:80/webster/concejales" target="_blank">Concejales Urbano</a></li>
+                                <li><a class="dropdown-item" href="http://134.209.33.125/:80/webster/juntas" target="_blank">Juntas Parroquiales</a></li>
                             </ul>
                         </li>
 

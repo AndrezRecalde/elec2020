@@ -78,7 +78,7 @@
                             <h5 class="card-header">
                                 Autenticación - Elecciones Seccionales
                             </h5>
-                            <img src="images/cne.png" class="card-img-top" alt="banner-1" />
+                            <img src="images/3972784.jpg" class="card-img-top" alt="banner-1" />
                             <div class="card-body">
                                 <div>
                                     <label for="formGroupExampleInput" class="form-label">Usuario</label>
@@ -115,5 +115,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
                 integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous"></script>
+        <script>
+            localStorage.removeItem("login");
+        </script>
     </body>
 </html>

@@ -254,6 +254,9 @@
         <script type="text/javascript">
             $("#alerts-x").fadeIn(300).delay(1500).fadeOut(400);
         </script>
+        <script>
+            localStorage.setItem("login", "logueado");
+        </script>
     </body>
 
 </html>
